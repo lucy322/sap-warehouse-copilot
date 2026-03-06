@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sap_warehouse_copilot"
+version = "1.0.0"
+description = "SAP Warehouse Copilot — Voice-driven inventory assistant powered by NVIDIA NIM, Riva Speech AI, and Reachy Mini"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Amit Kumar Lal", email = "amitkumarlal@gmail.com"}
+]
+dependencies = [
+    "reachy-mini>=0.2.0",
+    "openai>=1.0.0",
+    "numpy>=1.24.0",
+    "requests>=2.31.0",
+    "scipy>=1.10.0",
+]
+
+[project.entry-points."reachy_mini.apps"]
+sap_warehouse_copilot = "sap_warehouse_copilot.main:SAPWarehouseCopilot"
+
+[tool.setuptools.packages.find]
+include = ["sap_warehouse_copilot*"]
+
+[tool.setuptools.package-data]
+"sap_warehouse_copilot" = ["static/**/*"]
