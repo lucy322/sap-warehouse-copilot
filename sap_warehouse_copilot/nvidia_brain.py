@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
 NIM_BASE_URL = os.environ.get("NIM_BASE_URL", "https://integrate.api.nvidia.com/v1")
-NIM_MODEL = os.environ.get("NIM_MODEL", "meta/llama-3.1-70b-instruct")
+NIM_MODEL = os.environ.get("NIM_MODEL", "nvidia/llama-3.1-nemotron-70b-instruct")
 
 # Riva cloud endpoint (gRPC)
 RIVA_ASR_URI = os.environ.get("RIVA_ASR_URI", "grpc.nvcf.nvidia.com:443")
