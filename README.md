@@ -23,6 +23,9 @@ tags:
 
 > The world's first SAP-integrated Reachy Mini app. Ask about stock levels, purchase orders, and maintenance — your robot responds with voice AND expressive body language.
 
+<img width="1190" height="661" alt="image" src="https://github.com/user-attachments/assets/13e3e516-17a5-4fd1-9014-f21a663fcc83" />
+
+
 ## Architecture
 
 ```
