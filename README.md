@@ -3,9 +3,10 @@ title: SAP Warehouse Copilot
 emoji: 🤖
 colorFrom: green
 colorTo: yellow
-sdk: static
+sdk: docker
 pinned: true
 license: apache-2.0
+app_port: 7860
 tags:
   - reachy_mini
   - nvidia
