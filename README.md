@@ -42,6 +42,7 @@ tags:
           │  Head • Antennas • Voice │
           └──────────────────────────┘
 ```
+<img width="410" height="410" alt="image" src="https://github.com/user-attachments/assets/28337d2c-83d5-4138-b5dc-883ab8ab586e" />
 
 ## NVIDIA Stack
 
@@ -129,7 +130,7 @@ To connect to a real SAP S/4HANA system:
 
 ## Author
 
-**Amit Kumar Lal** — SAP Technical Expert | Microsoft | NVIDIA AI Enthusiast
+*[*Amit Lal](https://www.amit-lal.com)** — SAP Technical Expert | Microsoft | NVIDIA AI Enthusiast
 
 Built with NVIDIA NIM, Riva Speech AI, and Reachy Mini SDK.
 
