@@ -337,88 +337,13 @@ body {
     padding: 20px 0;
 }
 
-.robot-body { position: relative; width: 120px; height: 160px; }
-
-.antenna {
-    position: absolute;
-    width: 4px;
-    height: 40px;
-    background: var(--nvidia-green);
-    border-radius: 2px;
-    transform-origin: bottom center;
-    transition: transform 0.3s ease;
-}
-.antenna-left { left: 30px; top: 0; transform: rotate(-20deg); }
-.antenna-right { right: 30px; top: 0; transform: rotate(20deg); }
-.antenna::after {
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: -3px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--nvidia-green);
-}
-
-.robot-head {
-    position: absolute;
-    top: 35px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 55px;
-    background: var(--nvidia-card);
-    border: 2px solid var(--nvidia-green);
-    border-radius: 20px 20px 15px 15px;
-    transition: transform 0.3s ease;
-}
-
-.robot-eye {
-    position: absolute;
-    top: 15px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--nvidia-green);
-    transition: all 0.3s;
-}
-.robot-eye-left { left: 14px; }
-.robot-eye-right { right: 14px; }
-
-.robot-mouth {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 4px;
-    background: var(--nvidia-green);
-    border-radius: 2px;
-    transition: all 0.3s;
-}
-
-.robot-neck {
-    position: absolute;
-    top: 90px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 15px;
-    background: var(--nvidia-border);
-    border-radius: 4px;
-}
-
-.robot-torso {
-    position: absolute;
-    top: 105px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 55px;
-    background: var(--nvidia-card);
+.robot-photo {
+    width: 180px;
+    height: auto;
+    border-radius: var(--radius);
     border: 2px solid var(--nvidia-border);
-    border-radius: 12px;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 12px rgba(118, 185, 0, 0.2));
 }
 
 .robot-state-label {
@@ -466,27 +391,18 @@ body {
     color: var(--nvidia-green);
 }
 
-/* ---- Robot Animations ---- */
-.robot-idle .robot-head { animation: idleSway 4s ease-in-out infinite; }
-.robot-listening .robot-head { animation: listenTilt 1s ease-in-out infinite; }
-.robot-listening .robot-eye { animation: eyeGlow 0.5s ease-in-out infinite alternate; }
-.robot-thinking .robot-head { animation: thinkLook 2s ease-in-out infinite; }
-.robot-thinking .antenna { animation: antennaPulse 0.5s ease-in-out infinite alternate; }
-.robot-speaking .robot-mouth { animation: speak 0.3s ease-in-out infinite alternate; }
+/* ---- Robot Photo Animations ---- */
+.robot-idle .robot-photo { animation: photoIdle 4s ease-in-out infinite; }
+.robot-listening .robot-photo { animation: photoListen 1s ease-in-out infinite; border-color: var(--sap-gold); }
+.robot-thinking .robot-photo { animation: photoThink 2s ease-in-out infinite; border-color: var(--sap-blue); }
+.robot-speaking .robot-photo { animation: photoSpeak 0.6s ease-in-out infinite alternate; border-color: var(--nvidia-green); }
+.robot-alert .robot-photo { animation: photoAlert 0.3s ease-in-out infinite; border-color: var(--red); filter: drop-shadow(0 4px 12px rgba(239, 68, 68, 0.4)); }
 
-@keyframes idleSway { 0%, 100% { transform: translateX(-50%) rotate(0deg); } 50% { transform: translateX(-50%) rotate(3deg); } }
-@keyframes listenTilt { 0%, 100% { transform: translateX(-50%) rotate(-5deg); } 50% { transform: translateX(-50%) rotate(5deg); } }
-@keyframes eyeGlow { from { box-shadow: 0 0 4px var(--nvidia-green); } to { box-shadow: 0 0 12px var(--nvidia-green); } }
-@keyframes thinkLook { 0%, 100% { transform: translateX(-50%) translateY(0) rotate(-8deg); } 50% { transform: translateX(-50%) translateY(-5px) rotate(3deg); } }
-@keyframes antennaPulse { from { background: var(--nvidia-green); } to { background: var(--sap-gold); } }
-@keyframes speak { from { width: 20px; height: 4px; } to { width: 24px; height: 10px; border-radius: 6px; } }
-
-/* Alert animations */
-.robot-alert .robot-head { animation: alertShake 0.3s ease-in-out infinite; border-color: var(--red); }
-.robot-alert .robot-eye { background: var(--red); }
-.robot-alert .antenna::after { background: var(--red); }
-
-@keyframes alertShake { 0%, 100% { transform: translateX(-50%) rotate(-4deg); } 50% { transform: translateX(-50%) rotate(4deg); } }
+@keyframes photoIdle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(2deg); } }
+@keyframes photoListen { 0%, 100% { transform: rotate(-3deg) scale(1.02); } 50% { transform: rotate(3deg) scale(1.02); } }
+@keyframes photoThink { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-4px) rotate(2deg); } }
+@keyframes photoSpeak { from { transform: scale(1); } to { transform: scale(1.03); } }
+@keyframes photoAlert { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 
 /* ---- Scrollbar ---- */
 ::-webkit-scrollbar { width: 6px; }

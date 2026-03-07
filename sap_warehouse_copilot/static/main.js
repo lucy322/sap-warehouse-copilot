@@ -181,7 +181,7 @@ function setRobotState(state) {
     const label = document.getElementById('robotStateLabel');
     const badge = document.getElementById('statusBadge');
 
-    viz.querySelector('.robot-body').className = 'robot-body';
+    viz.className = 'robot-viz';
 
     const stateMap = {
         idle: { cls: 'robot-idle', label: 'Idle — Waiting for input', badgeCls: '', badgeText: 'Idle' },
@@ -191,7 +191,7 @@ function setRobotState(state) {
     };
 
     const s = stateMap[state] || stateMap.idle;
-    viz.querySelector('.robot-body').classList.add(s.cls);
+    viz.classList.add(s.cls);
     label.textContent = s.label;
     badge.className = `status-badge ${s.badgeCls}`;
     badge.querySelector('.status-text').textContent = s.badgeText;
@@ -204,19 +204,19 @@ function updateRobotStateFromAPI(apiState) {
 }
 
 function animateRobotForHealth(metadata) {
-    const body = document.querySelector('.robot-body');
+    const viz = document.getElementById('robotViz');
     const health = metadata?.stock_health;
     const overdue = metadata?.has_overdue;
 
-    body.className = 'robot-body';
+    viz.className = 'robot-viz';
 
     if (health === 'OUT_OF_STOCK' || health === 'CRITICAL' || health === 'RED' || overdue) {
-        body.classList.add('robot-alert');
+        viz.classList.add('robot-alert');
         setTimeout(() => {
-            body.className = 'robot-body robot-idle';
+            viz.className = 'robot-viz robot-idle';
         }, 3000);
     } else {
-        body.classList.add('robot-idle');
+        viz.classList.add('robot-idle');
     }
 }
 
