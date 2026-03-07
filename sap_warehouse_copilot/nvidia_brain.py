@@ -31,6 +31,11 @@ NVIDIA_API_KEY = os.environ.get("NVIDIA_API_KEY", "")
 NIM_BASE_URL = os.environ.get("NIM_BASE_URL", "https://integrate.api.nvidia.com/v1")
 NIM_MODEL = os.environ.get("NIM_MODEL", "nvidia/llama-3.1-nemotron-70b-instruct")
 
+# Groq fallback
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_BASE_URL = "https://api.groq.com/openai/v1"
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.1-70b-versatile")
+
 # Riva cloud endpoint (gRPC)
 RIVA_ASR_URI = os.environ.get("RIVA_ASR_URI", "grpc.nvcf.nvidia.com:443")
 RIVA_TTS_URI = os.environ.get("RIVA_TTS_URI", "grpc.nvcf.nvidia.com:443")
@@ -67,13 +72,21 @@ class NVIDIABrain:
     """Orchestrates NIM LLM inference with SAP tool-calling."""
 
     def __init__(self):
-        if not NVIDIA_API_KEY:
-            logger.warning("NVIDIA_API_KEY not set — using demo mode with limited responses.")
-
-        self.client = OpenAI(
-            base_url=NIM_BASE_URL,
-            api_key=NVIDIA_API_KEY or "demo-key",
-        )
+        if NVIDIA_API_KEY:
+            self.client = OpenAI(base_url=NIM_BASE_URL, api_key=NVIDIA_API_KEY)
+            self.model = NIM_MODEL
+            self.provider = "NVIDIA NIM"
+            logger.info(f"Using NVIDIA NIM: {NIM_MODEL}")
+        elif GROQ_API_KEY:
+            self.client = OpenAI(base_url=GROQ_BASE_URL, api_key=GROQ_API_KEY)
+            self.model = GROQ_MODEL
+            self.provider = "Groq"
+            logger.info(f"NVIDIA_API_KEY not set — falling back to Groq: {GROQ_MODEL}")
+        else:
+            self.client = OpenAI(base_url=NIM_BASE_URL, api_key="demo-key")
+            self.model = NIM_MODEL
+            self.provider = "demo"
+            logger.warning("No API keys set — using demo mode with limited responses.")
         self.conversation_history: list[dict] = [
             {"role": "system", "content": SYSTEM_PROMPT}
         ]
@@ -197,7 +210,7 @@ class NVIDIABrain:
         try:
             # First call — may include tool_calls
             response = self.client.chat.completions.create(
-                model=NIM_MODEL,
+                model=self.model,
                 messages=self.conversation_history,
                 tools=SAP_TOOLS,
                 tool_choice="auto",
@@ -269,7 +282,7 @@ class NVIDIABrain:
 
                 # Second call — generate natural language summary
                 response = self.client.chat.completions.create(
-                    model=NIM_MODEL,
+                    model=self.model,
                     messages=self.conversation_history,
                     temperature=0.3,
                     max_tokens=512,
